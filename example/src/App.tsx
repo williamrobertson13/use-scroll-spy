@@ -63,7 +63,11 @@ export default function App() {
             key={section.id}
             id={section.id}
             className={`App-section App-section--${section.id}`}
-            ref={(ref) => setScrollItemRef(ref, index)}
+            ref={(ref) => {
+              if (ref) {
+                setScrollItemRef(ref, index);
+              }
+            }}
           ></section>
         ))}
       </div>

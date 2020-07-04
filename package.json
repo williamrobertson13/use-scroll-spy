@@ -5,6 +5,7 @@
   "author": "williamrobertson13",
   "license": "MIT",
   "repository": "williamrobertson13/use-scroll-spy",
+  "homepage": "https://williamrobertson13.github.io/use-scroll-spy/",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

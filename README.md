@@ -10,6 +10,11 @@
 npm install --save use-scroll-spy
 ```
 
+## Live demo
+
+
+[https://williamrobertson13.github.io/use-scroll-spy/](https://williamrobertson13.github.io/use-scroll-spy/)
+
 ## Usage
 
 ```tsx
@@ -23,16 +28,16 @@ export default function Example() {
     <div>
       {scrollItems.map(({ ref, isActive }) => {
         <a
-          key={ref?.id}
-          href={ref?.id}
+          key={ref.id}
+          href={ref.id}
           className={isActive ? 'is-active' : ''}
           onClick={(e) => {
             e.preventDefault();
-            window.history.replaceState(null, '', `#${ref?.id}`);
-            ref?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+            window.history.replaceState(null, '', `#${ref.id}`);
+            ref.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
           }}
         >
-          {ref?.dataset?.title || 'Navigate to link'}
+          {ref.dataset?.title || 'Navigate to link'}
         </a>;
       })}
       <section id="one" data-title="Section one" ref={(ref) => setScrollItemRef(ref, 0)}></section>

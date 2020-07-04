@@ -1,14 +1,14 @@
 import { useState, useEffect, createRef, useRef, useCallback } from 'react';
 
 export type ScrollItem = {
-  ref: HTMLElement | null;
+  ref: HTMLElement;
   isActive: boolean;
 };
 
 export default function useScrollSpy(
   numSections: number,
   { root = null, rootMargin = '', threshold = 0.5 } = {} as IntersectionObserverInit
-): [ScrollItem[], (ref: HTMLElement | null, index: number) => void] {
+): [ScrollItem[], (ref: HTMLElement, index: number) => void] {
   const [scrollItems, setScrollItems] = useState<ScrollItem[]>(Array(numSections).fill({}));
 
   const observerRef = useRef(
@@ -35,7 +35,7 @@ export default function useScrollSpy(
       // Update scroll items if the sections happen to be dynamic
       for (let i = 0; i < numSections; i++) {
         newScrollItems[i] = {
-          ref: prevState[i].ref || createRef<HTMLElement | null>().current,
+          ref: prevState[i].ref || createRef<HTMLElement>().current,
           isActive: prevState[i].isActive || false,
         };
       }
@@ -53,8 +53,8 @@ export default function useScrollSpy(
   }, [numSections]);
 
   const setScrollItemRef = useCallback(
-    (ref: HTMLElement | null, index: number) => {
-      if (!ref?.id) {
+    (ref: HTMLElement, index: number) => {
+      if (!ref.id) {
         console.warn("WARNING: A ref set using use-scroll-spy doesn't have an ID which could be problematic for intended usage.");
       }
 
