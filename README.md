@@ -13,17 +13,32 @@ npm install --save use-scroll-spy
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import * as React from 'react';
+import useScrollSpy from 'use-scroll-spy';
 
-import { useMyHook } from 'use-scroll-spy'
+export default function Example() {
+  const [scrollItems, setScrollItemRef] = useScrollSpy(2);
 
-const Example = () => {
-  const example = useMyHook()
   return (
     <div>
-      {example}
+      {scrollItems.map(({ ref, isActive }) => {
+        <a
+          key={ref?.id}
+          href={ref?.id}
+          className={isActive ? 'is-active' : ''}
+          onClick={(e) => {
+            e.preventDefault();
+            window.history.replaceState(null, '', `#${ref?.id}`);
+            ref?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+          }}
+        >
+          {ref?.dataset?.title || 'Navigate to link'}
+        </a>;
+      })}
+      <section id="one" data-title="Section one" ref={(ref) => setScrollItemRef(ref, 0)}></section>
+      <section id="two" data-title="Section two" ref={(ref) => setScrollItemRef(ref, 1)}></section>
     </div>
-  )
+  );
 }
 ```
 
