@@ -20,7 +20,7 @@ export default function Sidebar({ lesson, scrollItems, handleRemoveLesson }: Pro
             {title}
             <ul>
               {sections.map((section) => {
-                const { isActive, ref } = scrollItemsIt.next().value;
+                const { isActive, ref } = scrollItemsIt.next().value as ScrollItem;
 
                 return (
                   <li
@@ -33,7 +33,7 @@ export default function Sidebar({ lesson, scrollItems, handleRemoveLesson }: Pro
                       onClick={(e) => {
                         e.preventDefault();
                         window.history.replaceState(null, '', `#${section.id}`);
-                        ref?.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
+                        ref.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'smooth' });
                       }}
                     >
                       {section.title}
